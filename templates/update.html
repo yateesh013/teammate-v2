@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .navbar a.nav-link {
+            color: white;
+            transition: color 0.3s;
+        }
+        .navbar a.nav-link:hover {
+            color: #ffcc00;
+        }
+        .navbar-brand img {
+            height: 30px;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .profile-header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .project-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .project-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover{
+            transform: scale(1.012);
+        }
+        .project-card .btn {
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .project-card .btn:hover {
+            transform: scale(1.1);
+        }
+        .project-card .btn-edit {
+            background-color: #28a745;
+            color: white;
+        }
+        .project-card .btn-edit:hover {
+            background-color: green;
+        }
+        .project-card .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+        .project-card .btn-delete:hover {
+            background-color: red;
+        }
+        .copy{
+            background-color:  #007bff;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <img src="{{url_for('static',filename='logo.png')}}" alt="Logo"> Find Teammates</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#project">My Projects</a>
+                    </li>
+              
+                    <li class="nav-item">
+                        <a class="nav-link" href="browse-projects">Browse Projects</a>
+                    </li>
+                    </ul>
+                <div>
+                    <button class="btn btn-outline-light me-2" onclick="location.href='logout'">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="container">
+        <div class="profile-header text-center">
+            <h2>Welcome, {{user}}</h2>
+            <p>Manage your projects and collaborate with others.</p>
+        </div>
+
+        <!-- Add Project Form -->
+        <div class="project-form mt-4">
+            <h4>Add a New Project</h4>
+            <form action="/updateproject" method="post">
+                <div class="mb-3">
+                    <label for="projectTitle" class="form-label">Project Title</label>
+                    <input name="title" type="text" class="form-control" id="projectTitle" placeholder="Enter project title">
+                </div>
+                <div class="mb-3">
+                    <label for="projectDescription" class="form-label">Project Description</label>
+                    <textarea name="description" class="form-control" id="projectDescription" rows="4" placeholder="Describe your project"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="techStack" class="form-label">Tech Stack</label>
+                    <input name="stack" type="text" class="form-control" id="techStack" placeholder="e.g., Python, JavaScript, HTML">
+                </div>
+                <div class="mb-3">
+                    <label for="teammates-required" class="form-label">Number of Teammates Required</label>
+                    <input name="number" type="number" class="form-control" id="teammates-required" placeholder="Enter number of teammates required">
+                </div>
+                <div class="mb-3">
+                    <label for="git" class="form-label">Git Repo Link</label>
+                    <input name="git" type="text" class="form-control" id="contactInfo" placeholder="Enter Github repo link">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Project</button>
+            </form>
+        </div>
+    </div>
+    <section class="text-center copy" >
+        <span >© 2025 Find Teammates. All rights reserved.
+        </span>
+    </section>
+    <script>
+      async function loadData(id) {
+          try {
+              const response = await fetch(`/get_data/${id}`);
+              const data = await response.json();
+  
+              if (response.ok) {
+                  // Populate form fields with fetched data
+                  document.getElementById("title").value = data.title;
+                  document.getElementById("description").value = data.description;
+                  document.getElementById("tech_stack").value = data.tech_stack;
+              } else {
+                  alert(data.error);
+              }
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+      }
+  
+      // Call this function with the record ID when needed
+      // Example: loadData(1);
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

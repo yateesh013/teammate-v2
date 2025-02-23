@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Teammates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #007bff;
+            color: white;
+        }
+        .navbar a.nav-link {
+            color: white;
+            transition: color 0.3s;
+        }
+        .navbar a.nav-link:hover {
+            color: #ffcc00;
+        }
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.7)), url("static/back2.jpg") center/cover no-repeat;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 40px 20px;
+        }
+        .features h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .feature-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            background-color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* About Us Section */
+        .about-img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* General Styling */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .copy{
+            background-color:  #007bff;
+           
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-outline-primary {
+            color: white;
+            border-color: #007bff;
+            
+        }
+        .btn-outline-primary:hover {
+            background-color:#0056b3;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <img src="{{url_for('static',filename='logo.png')}}" alt="Logo"> Find Teammates</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tech">Tech Stack</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                </ul>
+                <div>
+                    <!--btn btn-outline-primary me-2-->
+                    <button class="btn btn-outline-primary me-2" onclick="location.href='login'">Login</button>
+                   
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Welcome to Find Teammates</h1>
+        <h3 id="t1">Your one-stop platform to <span class="typing"></span> with peers on exciting projects.</h3>
+        <button class="btn btn-primary" onclick="location.href='login'">Get Started</button>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="features">
+        <div class="container">
+            <h2 class="text-center">Tech Stack</h2>
+            <div class="row mt-4">
+                <div class="col-md-3 text-center">
+                    <div class="feature-card">
+                        <img src="{{url_for('static',filename='python.jpg')}}" alt="Python">
+                        <h5>Python</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="feature-card">
+                        <img src="{{url_for('static',filename='html.png')}}" alt="HTML">
+                        <h5>HTML</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="feature-card">
+                        <img src="{{url_for('static',filename='javascript.png')}}" alt="JavaScript">
+                        <h5>JavaScript</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="feature-card">
+                        <img src="{{url_for('static',filename='java.png')}}" alt="Java">
+                        <h5>Java</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="features">
+        <div class="container">
+            <h2 class="text-center">About Us</h2>
+            <p class="text-center">Find Teammates is a platform designed to help students collaborate on projects by connecting them with peers who share similar interests and tech stacks.</p>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <img src="{{url_for('static',filename='f1.jpg')}}" class="about-img" alt="Feature 1">
+                    <div class="feature-card mt-3">
+                        <h5>Feature 1</h5>
+                        <p>Seamlessly search for teammates based on skills and interests.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{url_for('static',filename='f2.jpg')}}" class="about-img" alt="Feature 2">
+                    <div class="feature-card mt-3">
+                        <h5>Feature 2</h5>
+                        <p>Showcase your project ideas and attract like-minded collaborators.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{url_for('static',filename='f3.jpg')}}" class="about-img" alt="Feature 3">
+                    <div class="feature-card mt-3">
+                        <h5>Feature 3</h5>
+                        <p>Engage with a community of innovative students.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="text-center copy" >
+    <span >© 2025 Find Teammates. All rights reserved.
+    </span>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded",function() {
+    const animationScript = ["Connect", "Collaborate"];
+    const animationScript2=["Teammates"]
+    // Typing animation script start
+    new Typed(".typing", {
+      strings: animationScript,
+      typeSpeed: 120,
+      backSpeed: 80,
+      loop: true,
+	  showCursor:false,
+	  backDelay:500,
+        });
+    new Typed(".typing2", {
+      strings: animationScript2,
+      typeSpeed: 120,
+      backSpeed: 80,
+      loop: true,
+	  showCursor:false,
+	  backDelay:500,
+        });    
+    });
+    </script>
+</body>
+</html>
